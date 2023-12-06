@@ -49,7 +49,7 @@ citas_table = Table(
     Column('id', Integer, primary_key=True),
     Column('paciente', String(50)),
     Column('medico', String(50)),
-    Column('fecha', date),
+    Column('fecha', String(50)),
     Column("nota", String(100)),
     
 )
