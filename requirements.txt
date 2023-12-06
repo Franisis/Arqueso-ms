@@ -2,3 +2,4 @@ uvicorn
 fastapi
 sqlalchemy==1.4.42
 databases
+asyncpg
