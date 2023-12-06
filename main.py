@@ -73,7 +73,7 @@ Session = sessionmaker(bind=engine)
 
 session = Session()
 
-@app.get('/')
+@app.get('/', response_model=None)
 def message():
     return "Rasi Medical"
 
