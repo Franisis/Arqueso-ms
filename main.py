@@ -48,12 +48,12 @@ app.add_event_handler("startup", startup_db)
 
 
 class Cita(BaseModel):
-    __tablename__ = 'citas'
-    id = Column(Integer, primary_key=True, index=True)
-    paciente = Column(String(50))
-    medico = Column(String(50))
-    fecha = Column(String(50))
-    nota = Column(String(100))
+    #__tablename__ = 'citas'
+    #id = int
+    paciente = str
+    medico = str
+    fecha = str
+    nota : str
 
 
 citas_table = Table(
