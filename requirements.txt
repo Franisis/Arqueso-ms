@@ -1,4 +1,4 @@
 uvicorn
 fastapi
-sqlalchemy
+sqlalchemy==1.4.42
 databases
