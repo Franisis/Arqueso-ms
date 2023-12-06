@@ -34,7 +34,7 @@ app.add_event_handler("shutdown", shutdown)
 
 
 citas_table = Table(
-    "citas".
+    "citas",
     metadata,
     Column('id', Integer, primary_key=True),
     Column('paciente', String(50)),
