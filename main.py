@@ -12,6 +12,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI() #instancia de la aplicación
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 USERNAME = 'jumafe2'
 PASSWORD = 'isis2503'
 NAME_MEW = '10.128.0.4'
@@ -100,13 +108,6 @@ def create_post(db: Session, post: Cita):
     db.refresh(db_post)
     return db_post
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 @app.post('/citasCreate/')
 async def createCita(post: Cita):
