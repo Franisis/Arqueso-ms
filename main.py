@@ -56,7 +56,7 @@ class Cita(BaseModel):
     #medico = Column(String, index=True)
     medico : str
     #fecha = Column(String)
-    fecha : date
+    fecha : str
     #nota = Column(String)
     nota : str
 
