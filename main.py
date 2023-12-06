@@ -73,6 +73,10 @@ def getcitaby(algo):
 
 #citas/?cualquierCosa como cedula o fecha o doctor que atiende
 
+@app.get('/health-check')
+def getHC():
+    return "ok"
+
 @app.get('/citas/{}')
 def getCitasbysomeshit(someshit):
     #return list(filter(lambda item['someshit'] == stock, products))

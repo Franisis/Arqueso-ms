@@ -3,4 +3,4 @@ fastapi
 sqlalchemy==1.4.42
 databases
 asyncpg
-psycopg2==2.8.6
+psycopg-binary
