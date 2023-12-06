@@ -96,6 +96,7 @@ def getcitaby(algo):
 def getHC():
     return "ok"
 
+session.add
 """
 ------------------------------------------------
 funciones relacionadas al create Cita (POST)
@@ -104,6 +105,7 @@ def create_post(db: Session, post: Cita):
     db_post = Cita(**post.model_dump)
     db.add(db_post)
     db.commit()
+    print("commited")
     db.refresh(db_post)
     return db_post
 
