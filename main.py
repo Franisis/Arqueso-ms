@@ -43,13 +43,13 @@ class Cita(BaseModel):
     #id = Column(Integer, primary_key=True, index=True)
     #id = int
     #paciente = Column(String, index=True)
-    paciente = str
+    paciente : str
     #medico = Column(String, index=True)
-    medico = str
+    medico : str
     #fecha = Column(String)
-    fecha = date
+    fecha : date
     #nota = Column(String)
-    nota = str
+    nota : str
 
 citas_table = Table(
     "citas",
