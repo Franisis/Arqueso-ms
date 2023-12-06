@@ -30,9 +30,10 @@ Base = declarative_base()
 metadata=MetaData()
 database = Database(DATABASE_URL)
 engine = create_engine(DATABASE_URL)
-Base.metadata.create_all(bind=engine)
+
 Session = sessionmaker(bind=engine)
 session = Session()
+
 async def startup_db():
     try:
         await database.connect()
@@ -69,10 +70,7 @@ citas_table = Table(
     
 )
 
-
-
-
-
+Base.metadata.create_all(bind=engine)
 
 @app.get('/')
 def message():
