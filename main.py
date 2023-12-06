@@ -47,7 +47,7 @@ app.add_event_handler("shutdown", shutdown)
 
 
 class Cita(BaseModel):
-    __tablename__ = 'citas'
+    #__tablename__ = 'citas'
 
     #id = Column(Integer, primary_key=True, index=True)
     id = int
