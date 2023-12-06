@@ -29,7 +29,7 @@ DATABASE_URL = f"postgresql://{USERNAME}:{PASSWORD}@{NAME_MEW}:5432/{NAME_DB}"
 Base = declarative_base()
 metadata=MetaData()
 database = Database(DATABASE_URL)
-
+engine = create_engine(DATABASE_URL)
 
 async def startup_db():
     try:
@@ -46,19 +46,15 @@ app.add_event_handler("startup", startup_db)
 #app.add_event_handler("shutdown", shutdown)
 
 
-class Cita(BaseModel):
-    __tablename__ = 'citas'
 
-    #id = Column(Integer, primary_key=True, index=True)
-    id = int
-    #paciente = Column(String, index=True)
-    paciente : str
-    #medico = Column(String, index=True)
-    medico : str
-    #fecha = Column(String)
-    fecha : str
-    #nota = Column(String)
-    nota : str
+class Cita(Base):
+    __tablename__ = 'citas'
+    id = Column(Integer, primary_key=True, index=True)
+    paciente = Column(String(50))
+    medico = Column(String(50))
+    fecha = Column(String(50))
+    nota = Column(String(100))
+
 
 citas_table = Table(
     "citas",
@@ -71,7 +67,7 @@ citas_table = Table(
     
 )
 
-engine = create_engine(DATABASE_URL)
+
 Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 
