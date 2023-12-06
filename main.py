@@ -73,7 +73,7 @@ def getcitaby(algo):
 
 #citas/?cualquierCosa como cedula o fecha o doctor que atiende
 
-@app.get('/health-check')
+@app.get('/health-check', status_code=200)
 def getHC():
     return "ok"
 
