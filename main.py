@@ -40,7 +40,7 @@ class Cita(Base):
     id = Column(Integer, primary_key=True, index=True)
     paciente = Column(String, index=True)
     medico = Column(String, index=True)
-    fecha = Column(date)
+    fecha = Column(types.DATETIME)
     nota = Column(String)
 
 citas_table = Table(
