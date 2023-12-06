@@ -103,6 +103,7 @@ funciones relacionadas al create Cita (POST)
 def create_post(db: Session, post: Cita):
     db_post = Cita(paciente=post.paciente, medico = post.medico, 
                    fecha=post.fecha, nota=post.nota)
+    print(db_post)
     db.add(db_post)
     db.commit()
     db.refresh(db_post)
