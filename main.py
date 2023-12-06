@@ -77,7 +77,7 @@ session = Session()
 
 @app.get('/')
 def message():
-    return "Hola mundo!"
+    return "Rasi Medical"
 
 
 @app.get('/citas')
@@ -92,7 +92,7 @@ def getcitaby(algo):
 
 #citas/?cualquierCosa como cedula o fecha o doctor que atiende
 
-@app.get('/health-check', status_code=200)
+@app.get('/health-check/', status_code=200)
 def getHC():
     return "ok"
 
@@ -102,7 +102,6 @@ funciones relacionadas al create Cita (POST)
 """
 def create_post(db: Session, post: Cita):
     db_post = Cita(**post.model_dump)
-    print(db_post)
     db.add(db_post)
     db.commit()
     db.refresh(db_post)
@@ -118,8 +117,8 @@ async def createCita(post: Cita):
                 'fecha': cita.fecha,
                 'nota': cita.nota
                 }
-    response = jsonable_encoder(response)
-    return JSONResponse(content=response,headers={'Content-Type':'application/json'})
+    
+    return "Added succesfully"
     
 
 
