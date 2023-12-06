@@ -101,7 +101,8 @@ session.add
 ------------------------------------------------
 funciones relacionadas al create Cita (POST)
 """
-def create_post(db: Session, post: Cita):
+def create_post(post: Cita):
+    db = sessionmaker(bind=engine)
     db_post = Cita(fecha=post.fecha,
                    medico=post.medico,
                    paciente=post.paciente,
