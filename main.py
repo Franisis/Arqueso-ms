@@ -47,7 +47,7 @@ app.add_event_handler("startup", startup_db)
 
 
 
-class Cita(Base):
+class Cita(BaseModel):
     __tablename__ = 'citas'
     id = Column(Integer, primary_key=True, index=True)
     paciente = Column(String(50))
@@ -73,7 +73,7 @@ Session = sessionmaker(bind=engine)
 
 session = Session()
 
-@app.get('/', response_model=None)
+@app.get('/')
 def message():
     return "Rasi Medical"
 
@@ -111,7 +111,7 @@ def create_post(db: Session, post: Cita):
     db.refresh(db_post)
     
 
-@app.post('/citasCreate', response_model=None)
+@app.post('/citasCreate', response_model=Cita)
 async def createCita(post: Cita):
     create_post(db=session, post=post)
     return "Clean"
