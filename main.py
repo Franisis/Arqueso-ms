@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table, types
+from sqlalchemy.ext.declarative import declarative_base
 from databases import Database
 from sqlalchemy.sql import select
 from datetime import date
@@ -13,7 +14,7 @@ NAME_MEW = '10.128.0.4'
 NAME_DB = 'citas_db'
 DATABASE_URL = f"postgresql://{USERNAME}:{PASSWORD}@{NAME_MEW}:5432/{NAME_DB}"
 
-
+Base = declarative_base()
 metadata=MetaData()
 database = Database(DATABASE_URL)
 
@@ -33,6 +34,15 @@ app.add_event_handler("startup", startup_db)
 app.add_event_handler("shutdown", shutdown)
 
 
+class Cita(Base):
+    __tablename__ = 'citas'
+
+    id = Column(Integer, primary_key=True, index=True)
+    paciente = Column(String, index=True)
+    medico = Column(String, index=True)
+    fecha = Column(date)
+    nota = Column(String)
+
 citas_table = Table(
     "citas",
     metadata,
@@ -43,7 +53,8 @@ citas_table = Table(
     Column("nota", String(100)),
     
 )
-
+engine = create_engine(DATABASE_URL)
+Base.metadata.create_all(bind=engine)
 
 @app.get('/')
 def message():
