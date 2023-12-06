@@ -109,12 +109,11 @@ def create_post(db: Session, post: Cita):
                    )
     db.add(db_post)
     db.commit()
-    print("commited")
     db.refresh(db_post)
     return db_post
 
 
-@app.post('/citasCreate')
+@app.post('/citasCreate', status_code=201)
 async def createCita(post: Cita):
     cita = create_post(session, post)
     response = {'id':cita.id,
