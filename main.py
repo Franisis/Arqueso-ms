@@ -97,8 +97,8 @@ def create_post(db: Session, post: Cita):
 async def createCita(post: Cita):
     cita = create_post(session, post )
     response = {'id':cita.id,
-                'medico': cita.medico,
-                'paciente':cita.paciente,
+                'paciente': cita.paciente,
+                'medico':cita.medico,
                 'fecha': cita.fecha,
                 'nota': cita.nota
                 }
