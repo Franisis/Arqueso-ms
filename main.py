@@ -43,7 +43,7 @@ def shutdown():
     return database.disconnect()
 
 app.add_event_handler("startup", startup_db)
-app.add_event_handler("shutdown", shutdown)
+#app.add_event_handler("shutdown", shutdown)
 
 
 class Cita(BaseModel):
