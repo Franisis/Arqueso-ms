@@ -99,9 +99,16 @@ def create_post(db: Session, post: Cita):
     db.refresh(db_post)
     return db_post
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.post('/citasCreate/')
 async def createCita(post: Cita):
-    print(post)
     cita = create_post(session, post)
     response = {'id':cita.id,
                 'paciente': cita.paciente,
