@@ -8,6 +8,7 @@ from databases import Database
 from sqlalchemy.sql import select
 from datetime import date
 from sqlalchemy.orm import Session, sessionmaker
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI() #instancia de la aplicación
 
