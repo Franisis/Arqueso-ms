@@ -3,6 +3,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table, types
 from sqlalchemy.ext.declarative import declarative_base
+from pydantic import BaseModel
 from databases import Database
 from sqlalchemy.sql import select
 from datetime import date
@@ -36,7 +37,7 @@ app.add_event_handler("startup", startup_db)
 app.add_event_handler("shutdown", shutdown)
 
 
-class Cita(Base):
+class Cita(BaseModel):
     __tablename__ = 'citas'
 
     id = Column(Integer, primary_key=True, index=True)
@@ -103,7 +104,7 @@ async def createCita(post: Cita):
                 'nota': cita.nota
                 }
     response = jsonable_encoder(response)
-    return JSONResponse(content=response)
+    return JSONResponse(content=response,)
     
 
 
