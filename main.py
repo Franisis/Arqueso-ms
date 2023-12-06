@@ -10,9 +10,9 @@ app = FastAPI() #instancia de la aplicación
 USERNAME = 'jumafe2'
 PASSWORD = 'isis2503'
 NAME_MEW = '10.128.0.4'
-NAME_DB = 'citas_db'
+NAME_DB = 'ms-citas-db'
 DATABASE_URL = 'postgresql://'+USERNAME+':'+PASSWORD+'@'+NAME_DB+'5432'+'/'+NAME_DB
-
+print(DATABASE_URL)
 metadata=MetaData()
 database = Database(DATABASE_URL)
 
