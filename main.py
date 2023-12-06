@@ -102,7 +102,7 @@ session.add
 funciones relacionadas al create Cita (POST)
 """
 def create_post(db: Session, post: Cita):
-    db_post = Cita(**post.model_dump)
+    db_post = Cita(**post.dict)
     db.add(db_post)
     db.commit()
     print("commited")
