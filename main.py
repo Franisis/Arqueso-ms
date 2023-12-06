@@ -40,11 +40,16 @@ app.add_event_handler("shutdown", shutdown)
 class Cita(BaseModel):
     __tablename__ = 'citas'
 
-    id = Column(Integer, primary_key=True, index=True)
-    paciente = Column(String, index=True)
-    medico = Column(String, index=True)
-    fecha = Column(String)
-    nota = Column(String)
+    #id = Column(Integer, primary_key=True, index=True)
+    id = int
+    #paciente = Column(String, index=True)
+    paciente = str
+    #medico = Column(String, index=True)
+    medico = str
+    #fecha = Column(String)
+    fecha = date
+    #nota = Column(String)
+    nota = str
 
 citas_table = Table(
     "citas",
