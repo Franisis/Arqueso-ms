@@ -111,20 +111,12 @@ def create_post(db: Session, post: Cita):
     db.add(db_post)
     db.commit()
     db.refresh(db_post)
-    return db_post
+    
 
-@app.post('/citasCreate', status_code=201)
+@app.post('/citasCreate')
 async def createCita(post: Cita):
-    cita = create_post(db=session, post=post)
-    response = {
-        'id': cita.id,
-        'paciente': cita.paciente,
-        'medico': cita.medico,
-        'fecha': cita.fecha,
-        'nota': cita.nota
-    }
-    response = jsonable_encoder(response)
-    return JSONResponse(response)
+    create_post(db=session, post=post)
+    return "Clean"
 @app.get('/citas/{}')
 def getCitasbysomeshit(someshit):
     #return list(filter(lambda item['someshit'] == stock, products))
