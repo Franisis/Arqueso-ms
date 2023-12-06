@@ -1,10 +1,12 @@
 from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table, types
 from sqlalchemy.ext.declarative import declarative_base
 from databases import Database
 from sqlalchemy.sql import select
 from datetime import date
-
+from sqlalchemy.orm import Session, sessionmaker
 
 app = FastAPI() #instancia de la aplicación
 
@@ -54,7 +56,9 @@ citas_table = Table(
     
 )
 engine = create_engine(DATABASE_URL)
+Session = sessionmaker(bind=engine)
 Base.metadata.create_all(bind=engine)
+session = Session()
 
 @app.get('/')
 def message():
@@ -76,6 +80,32 @@ def getcitaby(algo):
 @app.get('/health-check', status_code=200)
 def getHC():
     return "ok"
+
+"""
+------------------------------------------------
+funciones relacionadas al create Cita (POST)
+"""
+def create_post(db: Session, post: Cita):
+    db_post = Cita(paciente=post.paciente, medico = post.medico, 
+                   fecha=post.fecha, nota=post.nota)
+    db.add(db_post)
+    db.commit()
+    db.refresh(db_post)
+    return db_post
+
+@app.post('/citasCreate/')
+async def createCita(post: Cita):
+    cita = create_post(session, post )
+    response = {'id':cita.id,
+                'medico': cita.medico,
+                'paciente':cita.paciente,
+                'fecha': cita.fecha,
+                'nota': cita.nota
+                }
+    reponse = jsonable_encoder(response)
+    return JSONResponse(content=response)
+    
+
 
 @app.get('/citas/{}')
 def getCitasbysomeshit(someshit):
