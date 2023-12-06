@@ -110,7 +110,7 @@ def create_post(db: Session, post: Cita):
     db.refresh(db_post)
     
 
-@app.post('/citas/')
+@app.post('/citasCreate/')
 async def createCita(post: Cita):
     create_post(db=session, post=post)
     return "Clean"
