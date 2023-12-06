@@ -93,7 +93,7 @@ def getcitaby(algo):
 def getHC():
     return "ok"
 
-session.add
+
 """
 ------------------------------------------------
 funciones relacionadas al create Cita (POST)
@@ -110,10 +110,11 @@ def create_post(db: Session, post: Cita):
     db.refresh(db_post)
     
 
-@app.post('/citasCreate')
+@app.post('/citasCreate/')
 async def createCita(post: Cita):
     create_post(db=session, post=post)
     return "Clean"
+
 @app.get('/citas/{}')
 def getCitasbysomeshit(someshit):
     #return list(filter(lambda item['someshit'] == stock, products))
