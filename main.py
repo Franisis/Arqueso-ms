@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table
 from databases import Database
 from sqlalchemy.sql import select
+from datetime import date
 
 
 app = FastAPI() #instancia de la aplicación
@@ -12,7 +13,7 @@ NAME_MEW = '10.128.0.4'
 NAME_DB = 'citas_db'
 DATABASE_URL = f"postgresql://{USERNAME}:{PASSWORD}@{NAME_MEW}:5432/{NAME_DB}"
 
-print(DATABASE_URL)
+
 metadata=MetaData()
 database = Database(DATABASE_URL)
 
@@ -32,14 +33,28 @@ app.add_event_handler("startup", startup_db)
 app.add_event_handler("shutdown", shutdown)
 
 
+citas_table = Table(
+    "citas".
+    metadata,
+    Column('id', Integer, primary_key=True),
+    Column('paciente', String(50)),
+    Column('medico', String(50)),
+    Column('fecha', date),
+    Column("nota", String(100)),
+    
+)
+
+
 @app.get('/')
 def message():
     return "Hola mundo!"
 
 
 @app.get('/citas')
-def getCitas():
-    pass
+async def getCitas():
+    query = select(citas_table)
+    citas = await database.fetch_all(query)
+    return citas
 
 @app.get('/citas/{}')
 def getcitaby(algo):
