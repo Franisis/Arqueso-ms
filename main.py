@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table
+from sqlalchemy import create_engine, Column, Integer, String, MetaData, Table, types
 from databases import Database
 from sqlalchemy.sql import select
 from datetime import date
@@ -39,7 +39,7 @@ citas_table = Table(
     Column('id', Integer, primary_key=True),
     Column('paciente', String(50)),
     Column('medico', String(50)),
-    Column('fecha', date),
+    Column('fecha', types.DateTime),
     Column("nota", String(100)),
     
 )
