@@ -108,7 +108,7 @@ def create_post(db: Session, post: Cita):
     return db_post
 
 
-@app.post('citasCreate/')
+@app.post('/citasCreate')
 async def createCita(post: Cita):
     cita = create_post(session, post)
     response = {'id':cita.id,
