@@ -41,7 +41,7 @@ class Cita(BaseModel):
     __tablename__ = 'citas'
 
     #id = Column(Integer, primary_key=True, index=True)
-    id = int
+    #id = int
     #paciente = Column(String, index=True)
     paciente = str
     #medico = Column(String, index=True)
