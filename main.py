@@ -101,8 +101,7 @@ def getHC():
 funciones relacionadas al create Cita (POST)
 """
 def create_post(db: Session, post: Cita):
-    db_post = Cita(id=post.id,paciente=post.paciente, medico = post.medico, 
-                   fecha=post.fecha, nota=post.nota)
+    db_post = Cita(**post.model_dump)
     print(db_post)
     db.add(db_post)
     db.commit()
