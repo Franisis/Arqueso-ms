@@ -119,7 +119,7 @@ async def createCita(post: Cita):
                 'nota': cita.nota
                 }
     response = jsonable_encoder(response)
-    return JSONResponse(content=response,)
+    return JSONResponse(content=response,headers={'Content-Type':'application/json'})
     
 
 
