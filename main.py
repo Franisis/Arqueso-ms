@@ -47,7 +47,7 @@ app.add_event_handler("shutdown", shutdown)
 
 
 class Cita(BaseModel):
-    #__tablename__ = 'citas'
+    __tablename__ = 'citas'
 
     #id = Column(Integer, primary_key=True, index=True)
     id = int
@@ -70,9 +70,11 @@ citas_table = Table(
     Column("nota", String(100)),
     
 )
+
 engine = create_engine(DATABASE_URL)
-Session = sessionmaker(bind=engine)
 Base.metadata.create_all(bind=engine)
+Session = sessionmaker(bind=engine)
+
 session = Session()
 
 @app.get('/')
