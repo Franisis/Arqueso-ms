@@ -101,33 +101,30 @@ session.add
 ------------------------------------------------
 funciones relacionadas al create Cita (POST)
 """
-def create_post(post: Cita):
-    db = sessionmaker(bind=engine)
-    db_post = Cita(fecha=post.fecha,
-                   medico=post.medico,
-                   paciente=post.paciente,
-                   nota = post.nota
-                   )
+def create_post(db: Session, post: Cita):
+    db_post = Cita(
+        fecha=post.fecha,
+        medico=post.medico,
+        paciente=post.paciente,
+        nota=post.nota
+    )
     db.add(db_post)
     db.commit()
     db.refresh(db_post)
     return db_post
 
-
 @app.post('/citasCreate', status_code=201)
 async def createCita(post: Cita):
-    cita = create_post(session, post)
-    response = {'id':cita.id,
-                'paciente': cita.paciente,
-                'medico':cita.medico,
-                'fecha': cita.fecha,
-                'nota': cita.nota
-                }
+    cita = create_post(db=session, post=post)
+    response = {
+        'id': cita.id,
+        'paciente': cita.paciente,
+        'medico': cita.medico,
+        'fecha': cita.fecha,
+        'nota': cita.nota
+    }
     response = jsonable_encoder(response)
     return JSONResponse(response)
-    
-
-
 @app.get('/citas/{}')
 def getCitasbysomeshit(someshit):
     #return list(filter(lambda item['someshit'] == stock, products))
